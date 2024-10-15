@@ -1,2 +1,6 @@
 # My-first-HTML-CSS-projects
-My first front-end learnings
+These are some of the basic pages I created while learning HTML.
+I uploaded these pages to learn how github works and how to publish a page.
+
+To view my sample webpage [here] (https://jeffr49.github.io/My-first-HTML-CSS-projects/).
+
