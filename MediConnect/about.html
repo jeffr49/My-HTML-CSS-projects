@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - MediConnect</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #072146;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap:40px;
+            padding: 10px 20px;
+        }
+
+        header img {
+            height: 130px;
+            margin-right: 85px;
+            margin-top: 15px;
+        }
+
+nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap:40px
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: large;
+        }
+        nav ul li a {
+            color: rgb(213, 213, 231); 
+            text-decoration: none; 
+            position: relative;
+            transition: color 0.3s ease; 
+        }
+
+        nav ul li a:hover {
+            color: #007bff; 
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px; 
+            background-color: #007bff; 
+            transition: width 0.3s ease; 
+        }
+
+        nav ul li a:hover::after {
+            width: 100%; /* Expand the underline to full width on hover */
+        }
+
+main {
+    flex: 1;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-us {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.about-us h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.about-us p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.content-section {
+    margin: 40px 0;
+}
+
+.content-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.content-section p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.team {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.team-member {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+    transform: scale(1.05);
+}
+
+.team-member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.team-member h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: black;
+    color: white;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: #007bff;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.timeline-item.left {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-item.right {
+    left: 50%;
+    text-align: left;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #007bff;
+    border: 3px solid white;
+    top: 20px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline-item.left::after {
+    right: -8px;
+}
+
+.timeline-item.right::after {
+    left: -8px;
+}
+
+.content {
+    padding: 20px 30px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><img src="images/logo.png" alt="Hospital Logo"></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="#">Login / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-us">
+            <h1>About MediConnect</h1>
+            <p>Committed to providing world-class healthcare services and improving the well-being of our community since 1995.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Our Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>1995</h3>
+                        <p>MedConnect was founded with a vision to revolutionize healthcare.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>2005</h3>
+                        <p>Expanded our services to include specialized departments and cutting-edge technology.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="content">
+                        <h3>2015</h3>
+                        <p>Recognized as one of the top healthcare providers in the country.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="content">
+                        <h3>2025</h3>
+                        <p>Continuing our mission with advanced AI-assisted diagnostics and personalized care.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>Our Mission</h2>
+            <p>To deliver compassionate, patient-centered care with the highest standards of excellence in clinical care, education, and research.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Our Vision</h2>
+            <p>To be a leading healthcare institution recognized for innovative treatments, advanced technologies, and exceptional patient experiences.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>Our Team</h2>
+            <p>Meet the dedicated professionals who make our mission possible.</p>
+            <div class="team">
+                <div class="team-member" onclick="openModal('Dr. Jane Smith', 'Cardiologist', 'Dr. Smith is a renowned cardiologist with over 15 years of experience in treating complex heart conditions.')">
+                    <img src="images/doctor1.png" alt="Dr. Jane Smith">
+                    <h3>Dr. Jane Smith</h3>
+                    <p>Cardiologist</p>
+                </div>
+                <div class="team-member" onclick="openModal('Dr. John Doe', 'Neurologist', 'Dr. Doe specializes in innovative neurological treatments and has published numerous research papers in the field.')">
+                    <img src="images/doctor2.png" alt="Dr. John Doe">
+                    <h3>Dr. John Doe</h3>
+                    <p>Neurologist</p>
+                </div>
+                <div class="team-member" onclick="openModal('Dr. Emily White', 'Orthopaedic Surgeon', 'Dr. White is an expert in minimally invasive orthopaedic surgeries and sports medicine.')">
+                    <img src="images/doctor3.png" alt="Dr. Emily White">
+                    <h3>Dr. George White</h3>
+                    <p>Orthopaedic Surgeon</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalName"></h2>
+            <h3 id="modalTitle"></h3>
+            <p id="modalBio"></p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 MediConnect. All rights reserved.
+    </footer>
+
+    <script>
+        function openModal(name, title, bio) {
+            var modal = document.getElementById("myModal");
+            document.getElementById("modalName").textContent = name;
+            document.getElementById("modalTitle").textContent = title;
+            document.getElementById("modalBio").textContent = bio;
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

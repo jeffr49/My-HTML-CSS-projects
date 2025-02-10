@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MediConnect</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #072146;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px 20px;
+            gap: 40px;
+        }
+
+        header img {
+            height: 130px;
+            margin-right: 85px;
+            margin-top: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: rgb(213, 213, 231);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #007bff;
+        }
+
+        /* Centered register form */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px;
+            position: relative;
+        }
+
+        .title {
+            font-size: 36px;
+            color: royalblue;
+            font-weight: 600;
+            letter-spacing: -1px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 30px;
+        }
+
+        .title::before, .title::after {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            left: 0px;
+            background-color: royalblue;
+        }
+
+        .title::before {
+            width: 18px;
+            height: 18px;
+            background-color: royalblue;
+        }
+
+        .title::after {
+            width: 18px;
+            height: 18px;
+            animation: pulse 1s linear infinite;
+        }
+
+        .message, .signin {
+            color: rgba(88, 87, 87, 0.822);
+            font-size: 16px;
+        }
+
+        .signin {
+            text-align: center;
+        }
+
+        .signin a {
+            color: royalblue;
+        }
+
+        .signin a:hover {
+            text-decoration: underline royalblue;
+        }
+
+        .flex {
+            display: flex;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .form label {
+            position: relative;
+            flex-grow: 1; /* Allow input fields to grow and take equal width */
+        }
+
+        /* First name field smaller */
+        .form label .input.first-name {
+            width: 200px;
+        }
+
+        .form label .input.last-name {
+            width: 200px; /* Smaller width for last name */
+        }
+
+        .form label .input {
+            width: 100%;
+            padding: 12px 12px 24px 12px;
+            outline: 0;
+            border: 1px solid rgba(105, 105, 105, 0.397);
+            border-radius: 12px;
+            font-size: 16px;
+        }
+
+        .form label .input + span {
+            position: absolute;
+            left: 12px;
+            top: 18px;
+            color: grey;
+            font-size: 1em;
+            cursor: text;
+            transition: 0.3s ease;
+        }
+
+        .form label .input:placeholder-shown + span {
+            top: 18px;
+            font-size: 1em;
+        }
+
+        .form label .input:focus + span, .form label .input:valid + span {
+            top: 35px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .form label .input:valid + span {
+            color: green;
+        }
+
+        .submit {
+            border: none;
+            outline: none;
+            background-color: royalblue;
+            padding: 15px;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 18px;
+            transform: .3s ease;
+            margin-top: 20px;
+        }
+
+        .submit:hover {
+            background-color: rgb(56, 90, 194);
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+
+            to {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #072146;
+            color: white;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><img src="images/logo.png" alt="Hospital Logo"></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Registration Form -->
+        <form class="form">
+            <p class="title">Register</p>
+            <p class="message">Signup now and get full access to our app.</p>
+            <div class="flex">
+                <label>
+                    <input required="" placeholder="" type="text" class="input first-name">
+                    <span>Firstname</span>
+                </label>
+
+                <label>
+                    <input required="" placeholder="" type="text" class="input last-name">
+                    <span>Lastname</span>
+                </label>
+            </div>  
+            
+            <label>
+                <input required="" placeholder="" type="email" class="input">
+                <span>Email</span>
+            </label> 
+                
+            <label>
+                <input required="" placeholder="" type="password" class="input">
+                <span>Password</span>
+            </label>
+
+            <label>
+                <input required="" placeholder="" type="password" class="input">
+                <span>Confirm password</span>
+            </label>
+
+            <button class="submit">Submit</button>
+            <p class="signin" style="font-size: 18px">Already have an account? <a href="login.html">Signin</a></p>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MediConnect | <a href="privacy.html">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments - MediConnect</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #072146;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header img {
+            height: 130px;
+            margin-right: 85px;
+            margin-top: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: rgb(213, 213, 231);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: large;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #007bff;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #072146;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .departments-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .department-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        .department-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .department-card h3 {
+            margin-bottom: 10px;
+            color: #072146;
+            font-size: 1.5rem;
+        }
+
+        .description {
+            display: none;
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+            opacity: 0;
+            max-height: 0;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
+        }
+
+        .description.show {
+            display: block;
+            opacity: 1;
+            max-height: 200px;
+        }
+
+        .read-more {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more:hover {
+            background: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: black;
+            color: white;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Chatbot Section */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .chatbot-toggle:hover {
+            background-color: #0056b3;
+        }
+
+        .chatbot-container {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            flex-direction: column;
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+        }
+
+        .chatbot-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .chatbot-header span {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .chatbot-messages {
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 0 0 10px 10px;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #send-message {
+            margin-left: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #send-message:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            margin: 10px 0;
+        }
+
+        .bot-message {
+            background-color: #e9ecef;
+            padding: 8px;
+            border-radius: 10px;
+            margin-right: auto;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background-color: #007bff;
+            color: white;
+            padding: 8px;
+            border-radius: 10px;
+            margin-left: auto;
+            max-width: 80%;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><img src="images/logo.png" alt="Hospital Logo"></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>MediConnect Departments</h1>
+        <div class="departments-container">
+            <div class="department-card">
+                <h3>Cardiology</h3>
+                <p class="description">Expert care for heart diseases, from diagnosis to advanced treatments. Our cardiology department is equipped with state-of-the-art technology to provide the best care for your heart.</p>
+                <a class="read-more" onclick="toggleDescription(this)">Read More</a>
+            </div>
+            <div class="department-card">
+                <h3>Neurology</h3>
+                <p class="description">Specialized in treating brain, nerve, and spinal disorders with precision. Our neurology team is dedicated to providing cutting-edge treatments for neurological conditions.</p>
+                <a class="read-more" onclick="toggleDescription(this)">Read More</a>
+            </div>
+            <div class="department-card">
+                <h3>Orthopaedics</h3>
+                <p class="description">Comprehensive care for bones, joints, and sports injuries. Our orthopaedics department offers advanced surgical and non-surgical treatments for musculoskeletal conditions.</p>
+                <a class="read-more" onclick="toggleDescription(this)">Read More</a>
+            </div>
+            <div class="department-card">
+                <h3>Psychology</h3>
+                <p class="description">Mental health support through counseling and therapy sessions. Our psychology department provides compassionate care for mental health and emotional well-being.</p>
+                <a class="read-more" onclick="toggleDescription(this)">Read More</a>
+            </div>
+            <div class="department-card">
+                <h3>Psychiatry</h3>
+                <p class="description">Expert psychiatric care for mood disorders, anxiety, and more. Our psychiatry department offers personalized treatment plans for mental health conditions.</p>
+                <a class="read-more" onclick="toggleDescription(this)">Read More</a>
+            </div>
+            <div class="department-card">
+                <h3>Pediatrics</h3>
+                <p class="description">Comprehensive care for children, from infancy to adolescence. Our pediatrics department is dedicated to the health and well-being of your child.</p>
+                <a class="read-more" onclick="toggleDescription(this)">Read More</a>
+            </div>
+            <div class="department-card">
+                <h3>Oncology</h3>
+                <p class="description">Advanced cancer treatments and compassionate care. Our oncology department provides cutting-edge therapies for cancer patients.</p>
+                <a class="read-more" onclick="toggleDescription(this)">Read More</a>
+            </div>
+            <div class="department-card">
+                <h3>Dermatology</h3>
+                <p class="description">Expert care for skin, hair, and nail conditions. Our dermatology department offers treatments for a wide range of skin disorders.</p>
+                <a class="read-more" onclick="toggleDescription(this)">Read More</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 MediConnect. All rights reserved.</p>
+    </footer>
+
+    <!-- Chatbot Section -->
+    <button class="chatbot-toggle" id="open-chatbot">Chat</button>
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>Chat with Us</h3>
+            <span id="close-chatbot">&times;</span>
+        </div>
+        <div class="chatbot-messages">
+            <div class="message bot-message">Hi! How can I assist you today?</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chat-input" placeholder="Type your message here...">
+            <button id="send-message">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Toggle department descriptions
+        function toggleDescription(button) {
+            const description = button.previousElementSibling;
+            description.classList.toggle("show");
+            button.textContent = description.classList.contains("show") ? "Show Less" : "Read More";
+        }
+
+        // Chatbot functionality
+        const chatbotContainer = document.querySelector('.chatbot-container');
+        const openChatbotBtn = document.querySelector('#open-chatbot');
+        const closeChatbot = document.querySelector('#close-chatbot');
+        const sendMessageBtn = document.querySelector('#send-message');
+        const chatInput = document.querySelector('#chat-input');
+        const chatbotMessages = document.querySelector('.chatbot-messages');
+
+        // Open chatbot
+        openChatbotBtn.addEventListener('click', () => {
+            chatbotContainer.style.display = 'flex';
+            openChatbotBtn.style.display = 'none';
+        });
+
+        // Close chatbot
+        closeChatbot.addEventListener('click', () => {
+            chatbotContainer.style.display = 'none';
+            openChatbotBtn.style.display = 'block';
+        });
+
+        // Send message
+        sendMessageBtn.addEventListener('click', () => {
+            const userMessage = chatInput.value.trim();
+            if (userMessage) {
+                addMessage(userMessage, 'user-message');
+                chatInput.value = '';
+
+                // Simulate bot response
+                setTimeout(() => {
+                    addMessage('Thank you for your message! We will assist you shortly.', 'bot-message');
+                }, 1000);
+            }
+        });
+
+        // Add message to chat
+        function addMessage(text, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', type);
+            messageDiv.textContent = text;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        // Animate department cards on scroll
+        const departmentCards = document.querySelectorAll('.department-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideUp 0.5s ease-in-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        departmentCards.forEach((card) => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

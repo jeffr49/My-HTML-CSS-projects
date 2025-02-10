@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MediConnect</title>
+    <style>
+       body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #072146;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 40px;
+            padding: 10px 20px;
+        }
+
+        header img {
+            height: 130px;
+            margin-right: 85px;
+            margin-top: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        nav ul li a {
+            color: rgb(213, 213, 231); 
+            text-decoration: none; 
+            position: relative;
+            transition: color 0.3s ease; 
+        }
+
+        nav ul li a:hover {
+            color: #007bff; 
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px; 
+            background-color: #007bff; 
+            transition: width 0.3s ease; 
+        }
+
+        nav ul li a:hover::after {
+            width: 100%; /* Expand the underline to full width on hover */
+        }
+
+        .login-signup {
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Main content styles */
+        main {
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 400px; /* Increase width for more space */
+            background: #F8F9FD;
+            background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+            border-radius: 30px; /* Slightly round the corners more */
+            padding: 35px 45px; /* Increase padding to make it more spacious */
+            border: 5px solid rgb(255, 255, 255);
+            box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+            margin: 20px;
+        }
+        .container a{
+            text-decoration: none;
+        }
+        .heading {
+            text-align: center;
+            font-weight: 900;
+            font-size: 32px; /* Slightly larger font size */
+            color: rgb(16, 137, 211);
+            margin-bottom: 20px; /* Add some spacing below the heading */
+        }
+
+        .form {
+            margin-top: 30px; /* Add more spacing above the form */
+        }
+
+        .form .input {
+            width: 100%;
+            background: white;
+            border: none;
+            padding: 18px 10px; /* Increased padding for larger input fields */
+            border-radius: 25px; /* More rounded edges for inputs */
+            margin-top: 20px; /* Increased space between inputs */
+            box-shadow: #cff0ff 0px 10px 10px -5px;
+            border-inline: 2px solid transparent;
+            font-size: 16px; /* Increase font size for better readability */
+        }
+
+        .form .input::-moz-placeholder {
+            color: rgb(170, 170, 170);
+        }
+
+        .form .input::placeholder {
+            color: rgb(170, 170, 170);
+        }
+
+        .form .input:focus {
+            outline: none;
+            border-inline: 2px solid #12B1D1;
+        }
+
+        .form .forgot-password {
+            display: block;
+            margin-top: 15px;
+            text-align: left; /* Align the forgot password link to the left */
+        }
+
+        .form .forgot-password a {
+            font-size: 13px; /* Increase font size for better readability */
+            color: #0099ff;
+            text-decoration: none;
+        }
+
+        .form .login-button {
+            display: block;
+            width: 100%;
+            font-weight: bold;
+            background: linear-gradient(45deg, rgb(16, 137, 211) 0%, rgb(18, 177, 209) 100%);
+            color: white;
+            padding-block: 18px; /* Increased padding for the button */
+            margin: 25px auto; /* Added more spacing above and below the button */
+            border-radius: 25px;
+            box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+            border: none;
+            transition: all 0.2s ease-in-out;
+            font-size: 18px; /* Slightly larger font size */
+        }
+
+        .form .login-button:hover {
+            transform: scale(1.03);
+            box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
+        }
+
+        .form .login-button:active {
+            transform: scale(0.95);
+            box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 10px -10px;
+        }
+
+        .social-account-container .title {
+            display: block;
+            text-align: center;
+            font-size: 12px;
+            color: rgb(170, 170, 170);
+            margin-top: 20px; /* Add space before social login section */
+        }
+
+        .social-account-container .social-accounts {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Increase gap between social icons */
+            margin-top: 10px;
+        }
+
+        .social-account-container .social-accounts .social-button {
+            background: linear-gradient(45deg, rgb(0, 0, 0) 0%, rgb(112, 112, 112) 100%);
+            border: 5px solid white;
+            padding: 7px;
+            border-radius: 50%;
+            width: 50px; /* Slightly bigger social buttons */
+            aspect-ratio: 1;
+            display: grid;
+            place-content: center;
+            box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 12px 10px -8px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .social-account-container .social-accounts .social-button:hover {
+            transform: scale(1.2);
+        }
+
+        .social-account-container .social-accounts .social-button:active {
+            transform: scale(0.9);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto; /* Push footer to the bottom */
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        footer a {
+            color: #f1f1f1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><img src="images/logo.png" alt="Hospital Logo"></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Sign In Section -->
+        <main>
+            <div class="container">
+                <div class="heading">Login</div>
+                <form id="loginForm" class="form">
+                    <input required class="input" type="email" name="email" id="email" placeholder="E-mail">
+                    <input required class="input" type="password" name="password" id="password" placeholder="Password">
+                    <span class="forgot-password"><a href="#">Forgot Password?</a></span>
+                    <input class="login-button" type="submit" value="Sign In">
+                </form>
+    
+                <div class="social-account-container">
+                    <span class="title">Don't have an account? <a href="sign_up.html">Sign Up</a></span>
+                </div>
+            </div>
+        </main>
+    
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById("loginForm").addEventListener("submit", function(event) {
+                    event.preventDefault(); // Prevent default form submission
+                    window.location.href = "dashboard.html"; // Redirect to dashboard
+                });
+            });
+        </script>
+
+    
+</body>
+</html>
